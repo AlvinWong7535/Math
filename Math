@@ -1,0 +1,77 @@
+#include <iostream>
+#include <cmath>
+
+int main() {
+    // Check if the user wants to use the calculator
+    std::cout << "Hi, I am Asian GPT. Do you want to use the calculator? (yes/no): ";
+    std::string calculatorResponse;
+    std::cin >> calculatorResponse;
+
+    while (calculatorResponse == "yes" || calculatorResponse == "Yes") {
+        // Declare variables to store user input
+        double num1, num2, num3;
+        char operation;
+
+        // Get user input for the calculator
+        std::cout << "Enter the number of values you want to operate on: ";
+        int numCount;
+        std::cin >> numCount;
+
+        // Get the first number
+        std::cout << "Enter the first number: ";
+        std::cin >> num1;
+
+        // Perform calculations based on the operator
+        for (int i = 1; i < numCount; ++i) {
+            // Get the operator
+            std::cout << "Enter operator (+, -, *, /, ^ for power, sqrt for square root): ";
+            std::cin >> operation;
+
+            // Get the next number
+            std::cout << "Enter the next number: ";
+            std::cin >> num2;
+
+            // Perform calculations based on the operator
+            switch (operation) {
+                case '+':
+                    num1 += num2;
+                    break;
+                case '-':
+                    num1 -= num2;
+                    break;
+                case '*':
+                    num1 *= num2;
+                    break;
+                case '/':
+                    // Check for division by zero
+                    if (num2 != 0) {
+                        num1 /= num2;
+                    } else {
+                        std::cout << "Error: Division by zero is not allowed." << std::endl;
+                        return 1;  // Exit with an error code
+                    }
+                    break;
+                case '^':
+                    std::cout << "Enter the power: ";
+                    std::cin >> num3;
+                    num1 = std::pow(num1, num3);
+                    break;
+                case 's':
+                    num1 = std::sqrt(num1);
+                    break;
+                default:
+                    std::cout << "Error: Invalid operator." << std::endl;
+                    return 1;  // Exit with an error code
+            }
+        }
+
+        // Display the result
+        std::cout << "Result: " << num1 << std::endl;
+
+        // Ask if the user wants to continue calculating
+        std::cout << "Do you want to continue calculating? (yes/no): ";
+        std::cin >> calculatorResponse;
+    }
+
+    return 0;
+}
